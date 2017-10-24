@@ -154,17 +154,10 @@ FILE_INFO = (
     '<span style="color: %(color)s">%(date_time)s %(file)s\n\n</span></div></td></tr>'
 )
 
-TABLE_START = '<table cellspacing="0" cellpadding="0" class="code_page">'
+TABLE_START = '<pre class="code_page">'
 
 LINE = (
-    '<tr>' +
-    '<td valign="top" id="L_%(table)d_%(line_id)d" class="code_text code_gutter" style="background: %(bgcolor)s">' +
-    '<span style="color: %(color)s;">%(line)s</span>' +
-    '</td>' +
-    '<td valign="top" class="code_text code_line" style="background-color: %(pad_color)s;">' +
-    '<div id="C_%(table)d_%(code_id)d">%(code)s\n</div>' +
-    '</td>' +
-    '</tr>'
+    '%(code)s\n'
 )
 
 CODE = '<span class="%(class)s" style="background-color: %(highlight)s; color: %(color)s;">%(content)s</span>'
@@ -173,11 +166,11 @@ ANNOTATION_CODE = (
     '<span class="%(class)s annotation" style="color: %(color)s;">%(content)s</span></a></span>'
 )
 
-TABLE_END = '</table>'
+TABLE_END = '</pre>'
 
-ROW_START = '<tr><td>'
+ROW_START = ''
 
-ROW_END = '</td></tr>'
+ROW_END = '<br />'
 
 DIVIDER = '<span style="color: %(color)s">\n...\n\n</span>'
 
@@ -846,7 +839,7 @@ class ExportHtml(object):
         processed_rows = ""
         html.write(BODY_START)
 
-        html.write(TABLE_START)
+        #html.write(TABLE_START)
         if not self.no_header:
             # Write file name
             date_time = time.strftime(self.date_time_format, self.time)
@@ -859,8 +852,8 @@ class ExportHtml(object):
                 }
             )
 
-        html.write(ROW_START)
-        html.write(TABLE_START)
+        #html.write(ROW_START)
+        #html.write(TABLE_START)
         # Convert view to HTML
         if self.multi_select:
             count = 0
@@ -888,9 +881,9 @@ class ExportHtml(object):
             processed_rows += str(self.curr_row) + "],"
             self.tables += 1
 
-        html.write(TABLE_END)
-        html.write(ROW_END)
-        html.write(TABLE_END)
+        #html.write(TABLE_END)
+        #html.write(ROW_END)
+        #html.write(TABLE_END)
 
         js_options = []
         if len(self.annot_tbl):
